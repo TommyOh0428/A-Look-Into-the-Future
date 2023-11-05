@@ -164,5 +164,10 @@
 ## Work Breakdown Structure / Project schedule
 
 ## Wireframe and prototype
+- **Wireframe** 
+![](photo/wireframe.jpg)
+
+- **Prototype**
+![](photo/prototype.jpg)
 
 ## Data Flow Diagrams 
