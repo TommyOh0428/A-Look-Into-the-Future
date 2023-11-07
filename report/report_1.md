@@ -163,6 +163,24 @@
 
 ## Work Breakdown Structure / Project schedule
 
+___Part 1___:
+
+Navid :
+    all slides, most of script, all user stories
+    
+Tommy :
+    set up entire git repository with github actions, written up most of the report, drawn up wireframe and prototype
+
+Abdurisaq :
+    portion of script, both data flow diagrams, 1/2 of app design, 1 API
+
+Uros :
+     1/2 of app design, app functionality, 1 API ,presentation video editing
+
+___Part 2___:
+
+
+
 ## Wireframe and prototype
 - **Wireframe** 
 ![](photo/wireframe.jpg)
