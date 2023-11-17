@@ -130,3 +130,8 @@ body {
 .non-clickable {
   cursor: default;
 }
+
+.empty-day {
+  height: 20px; /* Or whatever fixed height you prefer */
+  width: 20px;  /* Or whatever fixed width you prefer */
+}
