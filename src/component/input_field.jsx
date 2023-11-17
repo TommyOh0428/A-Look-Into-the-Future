@@ -50,6 +50,11 @@ function InputField(props) {
     });
   }
 
+  function handleCancel(){
+    setEventName('');
+    setEventDescription('');
+  }
+
   return (
     <div>
       <input
@@ -74,6 +79,7 @@ function InputField(props) {
         onChange={(e) => setEventDescription(e.target.value)}
       />
       <button onClick={handleAdd}>Add</button>
+      <button onClick={handleCancel}>Cancel</button>
     </div>
   );
 }
