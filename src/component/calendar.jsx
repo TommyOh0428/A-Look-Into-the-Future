@@ -36,6 +36,7 @@ const Calendar = () => {
               key={day}
               className={`calendar-day ${day === selectedDate.getDate() ? 'selected' : ''}`}
               onClick={() => handleDayClick(day)}
+              style={{ userSelect: 'none' }}
             >
               {day}
             </td>
