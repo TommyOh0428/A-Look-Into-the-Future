@@ -9,14 +9,18 @@ import { jwtDecode as jwt_decode } from 'jwt-decode';
 
 function App() {
   const [user, setUser] = useState({});
+  const [accessToken, setAccessToken] = useState("");
 
   function handleCallbackResponse(response) {
     console.log("Encoded JWT ID token: " + response.credential);
     var userObject = jwt_decode(response.credential);
-    
     console.log(userObject);
+    var accessToken = response.credential;
+    setAccessToken(accessToken);
     setUser(userObject);
     document.getElementById("signInDiv").hidden = true;
+    
+    
   }
 
   function handleSignOut(event) {
@@ -56,7 +60,7 @@ function App() {
       </div>
       <div className="event-form-background">
         <div className="event-form-container">
-          <EventForm />
+        <EventForm access_token={accessToken} />.
         </div>
       </div> 
     </div>
