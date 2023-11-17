@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 const Calendar = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [firstDayOfMonth, setFirstDayOfMonth] = useState(new Date().getDay());
 
   const daysInMonth = (month, year) => {
     return new Date(year, month + 1, 0).getDate();
@@ -15,7 +16,6 @@ const Calendar = () => {
   const currentMonth = selectedDate.getMonth();
   const currentYear = selectedDate.getFullYear();
   const daysCount = daysInMonth(currentMonth, currentYear);
-  const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
 
   const handleDayClick = (day) => {
     const newDate = new Date(currentYear, currentMonth, day);
@@ -23,8 +23,6 @@ const Calendar = () => {
   };
 
   const renderCalendar = () => {
-    
-
     const days = [];
     for (let row = 0; row < 6; row++) {
       const week = [];
@@ -36,7 +34,7 @@ const Calendar = () => {
               key={day}
               className={`calendar-day ${day === selectedDate.getDate() ? 'selected' : ''}`}
               onClick={() => handleDayClick(day)}
-              style={{ userSelect: 'none' }}
+              style={{ userSelect: 'none' }} 
             >
               {day}
             </td>
@@ -59,24 +57,34 @@ const Calendar = () => {
   };
 
   const goToPreviousMonth = () => {
-    setSelectedDate(new Date(currentYear, currentMonth - 1, 1));
+    const newMonth = currentMonth - 1;
+    const newYear = currentMonth === 0 ? currentYear - 1 : currentYear;
+    const newFirstDay = new Date(newYear, newMonth, 1).getDay();
+  
+    setFirstDayOfMonth(newFirstDay);
+    setSelectedDate(new Date(newYear, newMonth, selectedDate.getDate()));
   };
-
+  
   const goToNextMonth = () => {
-    setSelectedDate(new Date(currentYear, currentMonth + 1, 1));
+    const newMonth = currentMonth + 1;
+    const newYear = currentMonth === 11 ? currentYear + 1 : currentYear;
+    const newFirstDay = new Date(newYear, newMonth, 1).getDay();
+  
+    setFirstDayOfMonth(newFirstDay);
+    setSelectedDate(new Date(newYear, newMonth, selectedDate.getDate()));
   };
-
   return (
     <div className="calendar-container">
     <div className="calendar">
       <div className="calendar-header">
         <button onClick={goToPreviousMonth}>&lt;</button>
-        <h2>{monthNames[currentMonth]} {currentYear}</h2>
+        <h2 className = "non-clickable">{monthNames[currentMonth]} {currentYear}</h2>
         <button onClick={goToNextMonth}>&gt;</button>
+        
       </div>
       {renderCalendar()}
     </div>
-    <div className="selected-date">
+    <div className="selected-date non-clickable" >
         Selected Date: {selectedDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
       </div>
     </div>
