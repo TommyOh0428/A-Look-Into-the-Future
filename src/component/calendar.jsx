@@ -78,7 +78,7 @@ const Calendar = () => {
     <div className="calendar">
       <div className="calendar-header">
         <button onClick={goToPreviousMonth}>&lt;</button>
-        <h2 className = "non-clickable">{monthNames[currentMonth]} {currentYear}</h2>
+        <h2>{monthNames[currentMonth]} {currentYear}</h2>
         <button onClick={goToNextMonth}>&gt;</button>
         
       </div>
