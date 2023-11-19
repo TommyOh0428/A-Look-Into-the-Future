@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'; // Import hooks
 
-const Weather = () => {
+const Wthr = () => {
   const [wthrData, setData] = useState(null); // Weather data state
   const city = 'Vancouver'; // Setting Vancouver as the default city
 
