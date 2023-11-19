@@ -1,42 +1,39 @@
-import React, { useState, useEffect } from 'react'; // Import hooks
+import React, { useState, useEffect } from 'react';
 
 const Wthr = () => {
-  const [wthrData, setData] = useState(null); // Weather data state
-  const city = 'Vancouver'; // Setting Vancouver as the default city
-
-
-
-  //WE NEED A SINGLE API KEY, NOT SURE IF CREATED YET, BUT IF DONE PLEASE REPLACE 
-  const API_KEY = 'PUT_KEY_HERE'; // Replace with your API key
-  const BASE_URL = 'URL_PUT_HERE';//Need to set as well
+  const [weatherData, setWeatherData] = useState(null);
+  const city = 'Vancouver'; // City for weather data
+  const API_KEY = 'YOUR_API_KEY'; // OpenWeatherMap API key
+  const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather'; // OpenWeatherMap base URL
 
   useEffect(() => {
-    const fetchWeatherData = async () => { // Fetch weather data function
+    const fetchData = async () => {
       try {
-        const response = await fetch(`${BASE_URL}?q=${city}&appid=${API_KEY}&units=metric`); // Get weather data from OpenWeatherMap API
+        // Fetch weather data from OpenWeatherMap API
+        const response = await fetch(`${BASE_URL}?q=${city}&appid=${API_KEY}&units=metric`);
         if (response.ok) {
-          const data = await response.json(); 
-          setData(data);
+          const data = await response.json();
+          setWeatherData(data);
         } else {
-          // Handle error
-          console.error('Could not retreive weather data');
+          console.error('Failed to fetch weather data');
         }
       } catch (error) {
         console.error('Error fetching weather data:', error);
       }
     };
 
-    fetchWeatherData(); // Fetch weather data for Vancouver directly on component mount
-  }, []);
+    fetchData(); // Fetch weather data on component mount
+  }, [city, API_KEY, BASE_URL]);
 
   return (
     <div className="weather">
-      <h2>{wthrData?.name}</h2>
-      {wthrData && (
+      {weatherData && (
         <div>
-          <p>Temperature: {wthrData.main.temp}°C</p>
-          <p>Weather: {wthrData.weather[0].main}</p>
-          {/* You can display additional weather data here */}
+          <h2>{weatherData.name}</h2>
+          <p>Temperature: {weatherData.main.temp}°C</p>
+          <p>Weather: {weatherData.weather[0].main}</p>
+          <p>Sunrise: {new Date(weatherData.sys.sunrise * 1000).toLocaleTimeString()}</p>
+          <p>Sunset: {new Date(weatherData.sys.sunset * 1000).toLocaleTimeString()}</p>
         </div>
       )}
     </div>
