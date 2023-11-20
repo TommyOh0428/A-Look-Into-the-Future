@@ -17,8 +17,11 @@ test('displays sunrise and sunset times', async () => {
 
   const { getByText } = render(<Weather />);
 
+  const expectedSunriseTime = new Date(testWeather.sys.sunrise * 1000).toLocaleTimeString();
+  const expectedSunsetTime = new Date(testWeather.sys.sunset * 1000).toLocaleTimeString();
+
   await waitFor(() => {
-    expect(getByText('Sunrise: 12:33:12 AM')).toBeInTheDocument(); // Replace with expected sunrise time
-    expect(getByText('Sunset: 6:41:23 PM')).toBeInTheDocument(); // Replace with expected sunset time
+    expect(getByText(`Sunrise: ${expectedSunriseTime}`)).toBeInTheDocument();
+    expect(getByText(`Sunset: ${expectedSunsetTime}`)).toBeInTheDocument();
   });
 });
