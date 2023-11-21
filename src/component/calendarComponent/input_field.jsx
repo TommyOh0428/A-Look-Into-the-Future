@@ -48,6 +48,48 @@ function InputField(props) {
     setEventDescription('');
   }
 
+  async function getEventIdByName(eventName) {
+    const response = await fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + session.provider_token,  // Access token for Google
+        },
+    });
+
+    if (!response.ok) {
+        throw new Error(`Failed to fetch events: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const event = data.items.find(item => item.summary === eventName);
+
+    return event ? event.id : null;
+}
+
+  async function deleteEvent(eventId) {
+    const response = await fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events/${eventId}`, {
+      method: "DELETE",
+      headers: {
+        'Authorization': 'Bearer ' + session.provider_token,  // Access token for Google
+      },
+    });
+  
+    if (!response.ok) {
+      throw new Error(`Failed to delete event: ${response.status}`);
+    }
+  }
+
+function handleDelete(eventName) {
+  const  eventId = getEventIdByName(eventName);
+  if (eventId) {
+    const confirmation = window.confirm("Are you sure you want to delete this event?");
+    if (confirmation) {
+      deleteEvent(eventId);
+    }
+  } else {
+    alert("Event not found");
+  }
+}
   return (
     <div className="event-form-background">
       <div className="event-form-container">
@@ -77,6 +119,16 @@ function InputField(props) {
           />
           <button onClick={handleAdd}>Add</button>
           <button onClick={handleCancel}>Cancel</button>
+        </div>
+      </div>
+
+      <div className="event-delete-container">
+        <div>
+          <input
+            type="text"
+            placeholder="Find Event to Delete"
+          />
+          <button onClick={() => handleDelete(eventName)}>Delete Event</button>
         </div>
       </div>
     </div>
