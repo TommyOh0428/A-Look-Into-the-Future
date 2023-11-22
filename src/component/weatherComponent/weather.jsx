@@ -26,6 +26,9 @@ const WeatherApp = () => {
   // useState to change the weather icon
   const [wicon, setWicon] = useState(cloud_icon); 
 
+  // useState to store the hourly forecast data
+  const [hourlyForecast, setHourlyForecast] = useState();
+
   // Search function
   const search = async () => {
     const element = document.getElementsByClassName("cityInput");
@@ -47,6 +50,20 @@ const WeatherApp = () => {
   
     // get the data in json format
     let data = await response.json();
+
+    // get the hourly forecast data
+    if(data & data.coord) {
+      const hour_url = `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&units=Metric&appid=${process.env.REACT_APP_WEATHER_API}`;
+      const hour_response = await fetch(hour_url);
+      if (!hour_response.ok) {
+        // Handle errors
+        return;
+      }
+      const hour_data = await hour_response.json();
+      if (hour_data && hour_data.hourly)
+      setHourlyForecast(hour_data.hourly)
+    }
+
   
     // Check if the necessary properties exist before accessing them
     if (data && data.main && data.main.humidity && data.wind && data.wind.speed && data.main.temp && data.name && data.weather && data.weather[0] && data.weather[0].icon) {
@@ -117,7 +134,10 @@ const WeatherApp = () => {
             </div>
           </div>
         </div>
-    </div>
+      </div>
+
+    
+
   )
 }
 
