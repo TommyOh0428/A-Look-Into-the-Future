@@ -45,7 +45,7 @@ body {
 
 .calendar {
   font-family: Arial, sans-serif;
-  position:fixed;
+  position:absolute;
   top: 5vw; /* Adjust top positioning as needed */
   left: 18vw; /* Adjust left positioning as needed */
   transform: scale(1.7);
