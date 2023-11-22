@@ -12,6 +12,10 @@ function InputField(props) {
 
   
   async function handleAdd() {
+    if (!date || !time || !eventName || !eventDescription) {
+      alert('Please fill in all of the following fields:\n   Date, Time, Event Name, and Event Description');
+      return;
+    }
     const dateTime = new Date(`${date}T${time}`);
     const formattedDateTime = dateTime.toISOString();
     // Get the event details from your state or form
