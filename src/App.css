@@ -52,6 +52,7 @@ body {
   max-width: 36vw;
   margin: 0 auto;
   height: 2.7vw;
+  cursor: default;
 }
 .event-form-background {
   position: absolute;
@@ -75,7 +76,7 @@ body {
   background-color: rgb(30, 198, 198);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), /* Lowered intensity and changed color */
   0 15px 20px rgba(0, 0, 0, 0.15);
-  
+  cursor: default;
   border-radius: 20px; /* Add rounded corners */
   z-index: 100; /* Ensure it's above other elements */
 }
