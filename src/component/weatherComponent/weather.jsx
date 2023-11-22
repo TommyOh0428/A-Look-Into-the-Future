@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './weather.css'
 import styled from 'styled-components'
 
@@ -25,13 +25,11 @@ const WeatherApp = () => {
 
   // useState to change the weather icon
   const [wicon, setWicon] = useState(cloud_icon); 
-
   // Search function
   const search = async () => {
     const element = document.getElementsByClassName("cityInput");
-  
     if (element[0].value === "") {
-      return 0;
+      element[0].value = "Vancouver";
     }
   
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${element[0].value}&units=Metric&appid=${process.env.REACT_APP_WEATHER_API}`;
@@ -84,9 +82,14 @@ const WeatherApp = () => {
       }
       else {
         setWicon(clear_icon);
-      }
+      } 
     }
+    
   }
+
+  useEffect(() => {
+    search();
+  }, []); // Empty dependency array means this effect runs once on mount
 
   return (
     <div className='container'>
