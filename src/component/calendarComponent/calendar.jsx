@@ -44,8 +44,11 @@ const Calendar = () => {
   const handleDayClick = (day) => {
     const newDate = new Date(currentYear, currentMonth, day);
     setSelectedDate(newDate);
-    fetchEventsForDay(newDate);
-    setShowModal(true);
+    if(session && session.provider_token){
+      fetchEventsForDay(newDate);
+      setShowModal(true);
+    }
+    
   };
 
   const renderCalendar = () => {
