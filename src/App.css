@@ -53,6 +53,7 @@ body {
   margin: 0 auto;
   height: 2.7vw;
   cursor: default;
+  z-index: 1000002;
 }
 .event-form-background {
   position: absolute;
@@ -60,7 +61,6 @@ body {
   left: 33.5vw;
   width: 20px;
   background-color: rgb(202, 58, 58);
-  z-index: 10;
 }
 
 .event-form-container {
@@ -78,7 +78,6 @@ body {
   0 15px 20px rgba(0, 0, 0, 0.15);
   cursor: default;
   border-radius: 20px; /* Add rounded corners */
-  z-index: 100; /* Ensure it's above other elements */
 }
 .event-delete-container{
   position: absolute;
@@ -188,4 +187,34 @@ textarea:focus {
 .empty-day {
   height: 20px; /* Or whatever fixed height you prefer */
   width: 20px;  /* Or whatever fixed width you prefer */
+}
+
+.event-modal-backdrop {
+  position: fixed;
+  left: 30vw;
+  top: 5vw;
+  justify-content: flex-end; /* Align to the right */
+  align-items: flex-end; /* Align to the bottom */
+}
+
+.event-modal-content {
+  font-size: 0.7em;
+  position: fixed;
+  background: rgb(137, 29, 29);
+  padding: 0.5vw; /* Adjust padding */
+  border-radius: 4vw;
+  width: auto; /* Adjust width to fit content */
+  max-width: 300px; /* Set a maximum width */
+  margin: 1vw; /* Add some margin */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25); /* Optional: Adds shadow for better visibility */
+  display: flex; /* Add this line */
+  justify-content: center; /* Add this line */
+  align-items: center; /* Add this line */
+  text-align: center; /* Add this line */
+}
+
+.close-button {
+  position: absolute; /* Take the button out of the normal document flow */
+  right: 0vw; /* Position the button from the right */
+  top: 0vw; /* Position the button from the top */
 }

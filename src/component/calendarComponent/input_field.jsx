@@ -52,25 +52,7 @@ function InputField(props) {
     setEventDescription('');
   }
 
-  async function getEventIdByName(eventName) {
-    const response = await fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', {
-        method: 'GET',
-        headers: {
-            'Authorization': 'Bearer ' + session.provider_token,  // Access token for Google
-        },
-    });
-
-    if (!response.ok) {
-        throw new Error(`Failed to fetch events: ${response.status}`);
-    }
-
-    const data = await response.json();
-    const event = data.items.find(item => item.summary === eventName);
-
-    return event ? event.id : null;
-}
-
-  async function deleteEvent(eventId) {
+  /*async function deleteEvent(eventId) {
     const response = await fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events/${eventId}`, {
       method: "DELETE",
       headers: {
@@ -93,7 +75,7 @@ function handleDelete(eventName) {
   } else {
     alert("Event not found");
   }
-}
+}*/
   return (
     <div className="event-form-background">
       <div className="event-form-container">
@@ -125,17 +107,7 @@ function handleDelete(eventName) {
           <button onClick={handleCancel}>Cancel</button>
         </div>
       </div>
-
-      <div className="event-delete-container">
-        <div>
-          <input
-            type="text"
-            placeholder="Find Event to Delete"
-          />
-          <button onClick={() => handleDelete(eventName)}>Delete Event</button>
-        </div>
       </div>
-    </div>
   );
 }
 
