@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { useSession} from '@supabase/auth-helpers-react';
 import EventModal from './eventModal'
 
