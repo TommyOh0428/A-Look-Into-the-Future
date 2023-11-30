@@ -11,6 +11,10 @@ import rain_icon from "../Assets/rain.png"
 import snow_icon from "../Assets/snow.png"
 import wind_icon from "../Assets/wind.png"
 import humidity_icon from "../Assets/humidity.png"
+import sunrise_icon from "../Assets/sunrise.png"
+import sunset_icon from "../Assets/sunset.PNG"
+import high_temp_icon from "../Assets/temp-high.png"
+import low_temp_icon from "../Assets/temp-low.png"
 
 
 // Styled container component
@@ -25,6 +29,14 @@ const WeatherApp = () => {
 
   // useState to change the weather icon
   const [wicon, setWicon] = useState(cloud_icon); 
+
+  // useState to store the sunrise and sunset time
+  const [sunrise, setSunrise] = useState();
+  const [sunset, setSunset] = useState();
+ 
+  // useState to store the high and low temperature
+  const [highTemp, setHighTemp] = useState();
+  const [lowTemp, setLowTemp] = useState();
 
   // useState to store the hourly forecast data
   const [hourlyForecast, setHourlyForecast] = useState();
@@ -50,6 +62,18 @@ const WeatherApp = () => {
   
     // get the data in json format
     let data = await response.json();
+
+    if (data && data.sys && data.sys.sunrise && data.sys.sunset) {
+      const sunriseTime = new Date(data.sys.sunrise * 1000).toLocaleTimeString();
+      const sunsetTime = new Date(data.sys.sunset * 1000).toLocaleTimeString();
+      setSunrise(sunriseTime);
+      setSunset(sunsetTime);
+    }
+
+    if (data && data.main && data.main.temp_max && data.main.temp_min) {
+      setHighTemp(Math.round(data.main.temp_max) + '°C');
+      setLowTemp(Math.round(data.main.temp_min) + '°C');
+    }
 
     // get the hourly forecast data
     if(data & data.coord) {
@@ -107,37 +131,58 @@ const WeatherApp = () => {
 
   return (
     <div className='container'>
-      <div className="top-bar">
-        <input type='text' className='cityInput' placeholder='search'/>
-        <div className="search-icon" onClick={() => { search() }}>
-          <img src={search_icon} alt="search icon" />
+    <div className="top-bar">
+      <input type='text' className='cityInput' placeholder='search'/>
+      <div className="search-icon" onClick={() => { search() }}>
+        <img src={search_icon} alt="search icon" />
+      </div>
+    </div>
+    <div className="weather-image">
+      <img src={wicon} alt="weather icon" />
+    </div>
+    <div className="weather-temp">24°C</div>
+    <div className="weather-location">Vancouver</div>
+    <div className="data-container">
+      <div className="element">
+        <img src={humidity_icon} alt="" />
+        <div className="data">
+          <div className="humidity-percent">64%</div>
+          <div className="text">Humidity</div>
         </div>
       </div>
-      <div className="weather-image">
-        <img src={wicon} alt="weather icon" />
-      </div>
-      <div className="weather-temp">24°C</div>
-      <div className="weather-location">Vancouver</div>
-      <div className="data-container">
-          <div className="element">
-            <img src={humidity_icon} alt="" />
-            <div className="data">
-              <div className="humidity-percent">64%</div>
-              <div className="text">Humidity</div>
-            </div>
-          </div>
-          <div className="element">
-            <img src={wind_icon} alt="" />
-            <div className="data">
-              <div className="wind-rate">18 km/h</div>
-              <div className="text">Wind Speed</div>
-            </div>
-          </div>
+      <div className="element">
+        <img src={wind_icon} alt="" />
+        <div className="data">
+          <div className="wind-rate">18 km/h</div>
+          <div className="text">Wind Speed</div>
         </div>
       </div>
+    </div>
 
-    
+    {/* Display Sunrise and Sunset times */}
+    <div className="sunrise-sunset">
+      <div className="sunrise">Sunrise: {sunrise}</div>
+      <div className="sunset">Sunset: {sunset}</div>
+    </div>
 
+    {/* Display High and Low temperature */}
+    <div className="high-low-temp">
+      <div className="high-temp">High: {highTemp}</div>
+      <div className="low-temp">Low: {lowTemp}</div>
+    </div>
+
+    {/* Hourly forecast */}
+    <div className="hourly-forecast">
+      <h3>Hourly Forecast</h3>
+      {hourlyForecast && hourlyForecast.map((hour, index) => (
+        <div key={index} className="hourly-forecast-item">
+          <p>{new Date(hour.dt * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
+          <img src={`https://openweathermap.org/img/wn/${hour.weather[0].icon}.png`} alt="Hourly weather icon" />
+          <p>{Math.round(hour.temp)}°C</p>
+        </div>
+      ))}
+    </div>
+  </div>
   )
 }
 
