@@ -31,12 +31,12 @@ const WeatherApp = () => {
   const [wicon, setWicon] = useState(cloud_icon); 
 
   // useState to store the sunrise and sunset time
-  const [sunrise, setSunrise] = useState();
-  const [sunset, setSunset] = useState();
+  const [sunrise, setSunrise] = useState(sunrise_icon);
+  const [sunset, setSunset] = useState(sunset_icon);
  
   // useState to store the high and low temperature
-  const [highTemp, setHighTemp] = useState();
-  const [lowTemp, setLowTemp] = useState();
+  const [highTemp, setHighTemp] = useState(high_temp_icon);
+  const [lowTemp, setLowTemp] = useState(low_temp_icon);
 
   // useState to store the hourly forecast data
   const [hourlyForecast, setHourlyForecast] = useState();
@@ -165,14 +165,27 @@ const WeatherApp = () => {
 
     {/* Display Sunrise and Sunset times */}
     <div className="sunrise-sunset">
-      <div className="sunrise">Sunrise: {sunrise}</div>
-      <div className="sunset">Sunset: {sunset}</div>
+      <div className="weather-icons">
+       <img src={sunrise_icon} alt="" />
+      </div>
+      <div className="sunrise">{sunrise}</div>
+      <div className="weather-icons">
+      <img src={sunset_icon} alt="" />
+      </div>
+      <div className="sunset">{sunset}</div>
+      
     </div>
 
     {/* Display High and Low temperature */}
     <div className="high-low-temp">
+      <div className="temp-icons">
+        <img src={high_temp_icon} alt="" />
+      </div>
       <div className="high-temp">High: {highTemp}</div>
+      <div className="temp-icons">
+        <img src={low_temp_icon} alt="" />
       <div className="low-temp">Low: {lowTemp}</div>
+      </div>
     </div>
 
     {/* Hourly forecast */}
