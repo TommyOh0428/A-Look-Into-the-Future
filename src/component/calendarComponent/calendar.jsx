@@ -1,7 +1,7 @@
 import React, { useState} from 'react';
 import { useSession} from '@supabase/auth-helpers-react';
 import EventModal from './eventModal'
-
+import './calendar.css'
 const Calendar = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [events, setEvents] = useState([]);
@@ -53,19 +53,20 @@ const Calendar = () => {
     
   };
 
-const handleEventClick = (eventId) => {
+const handleEventClick = async (eventId) => {
     // You can store this in the state if needed
     setSelectedEventId(eventId);
     const event = events.find(event => event.id === eventId);
     const start = new Date(event.start.dateTime);
-
+    const end = new Date(event.end.dateTime);
   // Format the hours and minutes
   const startTime = `${start.getHours()}:${start.getMinutes() < 10 ? '0' : ''}${start.getMinutes()}`;
-
-  alert(`Event details:\n\nName: ${event.summary}\n\nEvent starts at: ${startTime}\n`);
+  const endTime = `${end.getHours()}:${end.getMinutes() < 10 ? '0' : ''}${end.getMinutes()}`;
+  alert(`Event details:\n\nName: ${event.summary}\n\nEvent starts at: ${startTime}\nEvent ends at: ${endTime}\n`);
     const shouldDelete = window.confirm('Do you want to delete this event?');
     if(shouldDelete){
-      deleteEvent(eventId);
+      await deleteEvent(eventId);
+      handleDayClick(selectedDate.getDate());
     }
   };
 
@@ -79,7 +80,9 @@ const handleEventClick = (eventId) => {
   
     if (!response.ok) {
       throw new Error(`Failed to delete event: ${response.status}`);
-    } else {alert(`Event deleted`);}
+    } else {
+      alert(`Event deleted`);
+    }
   }
   const renderCalendar = () => {
     
@@ -108,9 +111,7 @@ const handleEventClick = (eventId) => {
 
     return (
       <table className="calendar-grid">
-        <thead>
-          {/* ... (previous code remains the same) */}
-        </thead>
+        
         <tbody>{days}</tbody>
       </table>
     );
@@ -126,7 +127,8 @@ const handleEventClick = (eventId) => {
 
   return (
     
-    <div className="calendar">
+    <div className="calendar-container">
+      <div className="calendar">
       <div className="calendar-header">
         <button onClick={goToPreviousMonth}>&lt;</button>
         <h2>{monthNames[currentMonth]} {currentYear}</h2>
@@ -135,6 +137,9 @@ const handleEventClick = (eventId) => {
       <div className="selected-date">
         Selected Date: {selectedDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
       </div>
+      {renderCalendar()}
+      </div>
+      
       {showModal && (
         <EventModal
           events={events}
@@ -143,7 +148,7 @@ const handleEventClick = (eventId) => {
           handleEventClick={handleEventClick}
         />
       )}
-      {renderCalendar()}
+      
     </div>
   );
 };
