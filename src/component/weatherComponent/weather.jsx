@@ -16,10 +16,12 @@ import humidity_icon from "../Assets/humidity.png"
 // Styled container component
 const Wrapper = styled.div`
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 3%;
+  right: 2%;
+  width: 33.3%;
+  height: 95%;
 `;
-
+//42.75
 // Weather component function
 const WeatherApp = () => {
 
