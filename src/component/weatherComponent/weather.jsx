@@ -40,9 +40,6 @@ const WeatherApp = () => {
   const [highTemp, setHighTemp] = useState(high_temp_icon);
   const [lowTemp, setLowTemp] = useState(low_temp_icon);
 
-  // useState to store the hourly forecast data
-  const [hourlyForecast, setHourlyForecast] = useState();
-
   // Search function
   const search = async () => {
     const element = document.getElementsByClassName("cityInput");
@@ -76,18 +73,6 @@ const WeatherApp = () => {
       setLowTemp(Math.round(data.main.temp_min) + '°C');
     }
 
-    // get the hourly forecast data
-    if(data & data.coord) {
-      const hour_url = `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&units=Metric&appid=${process.env.REACT_APP_WEATHER_API}`;
-      const hour_response = await fetch(hour_url);
-      if (!hour_response.ok) {
-        // Handle errors
-        return;
-      }
-      const hour_data = await hour_response.json();
-      if (hour_data && hour_data.hourly)
-      setHourlyForecast(hour_data.hourly)
-    }
 
   
     // Check if the necessary properties exist before accessing them
@@ -160,7 +145,7 @@ const WeatherApp = () => {
         <img src={wind_icon} alt="" />
         <div className="data">
           <div className="wind-rate">18 km/h</div>
-          <div className="text">Wind Speed</div>
+          <div className="text"></div>
         </div>
       </div>
     </div>
@@ -190,17 +175,6 @@ const WeatherApp = () => {
       </div>
     </div>
 
-    {/* Hourly forecast */}
-    <div className="hourly-forecast">
-      <h3>Hourly Forecast</h3>
-      {hourlyForecast && hourlyForecast.map((hour, index) => (
-        <div key={index} className="hourly-forecast-item">
-          <p>{new Date(hour.dt * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
-          <img src={`https://openweathermap.org/img/wn/${hour.weather[0].icon}.png`} alt="Hourly weather icon" />
-          <p>{Math.round(hour.temp)}°C</p>
-        </div>
-      ))}
-    </div>
   </div>
   )
 }
