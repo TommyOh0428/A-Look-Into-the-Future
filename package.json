@@ -2,7 +2,7 @@
   "name": "final-project",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/TommyOh0428/Cmpt276-project.git",
+  "homepage": ".",
   "dependencies": {
     "@supabase/auth-helpers-react": "^0.4.2",
     "@supabase/supabase-js": "^2.38.5",
