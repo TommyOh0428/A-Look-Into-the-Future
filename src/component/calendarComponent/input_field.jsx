@@ -1,6 +1,7 @@
 // InputField.jsx
 import React, { useState } from 'react';
 import { useSession} from '@supabase/auth-helpers-react';
+import './calendar.css'
 
 function InputField(props) {
   const [date, setDate] = useState('');
@@ -8,8 +9,8 @@ function InputField(props) {
   const [eventName, setEventName] = useState('');
   const [eventDescription, setEventDescription] = useState('');
   const session = useSession();
-
-
+  const [endTime, setEndTime] = useState("");
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   
   async function handleAdd() {
     if (!date || !time || !eventName || !eventDescription) {
@@ -17,7 +18,9 @@ function InputField(props) {
       return;
     }
     const dateTime = new Date(`${date}T${time}`);
+    const endDateTime = new Date(`${date}T${endTime}`);
     const formattedDateTime = dateTime.toISOString();
+    const formattedEndDateTime = endDateTime.toISOString();
     // Get the event details from your state or form
     console.log(session.provider_token);
     const event = {
@@ -25,11 +28,11 @@ function InputField(props) {
       description: eventDescription,
       start: {
         dateTime: formattedDateTime,
-        timeZone: 'America/Los_Angeles',  // replace with the user's time zone
+        timeZone: timeZone,  // replace with the user's time zone
       },
       end: {
-        dateTime: formattedDateTime,
-        timeZone: 'America/Los_Angeles',  // replace with the user's time zone
+        dateTime: formattedEndDateTime,
+        timeZone: timeZone,  // replace with the user's time zone
       },
     };
     await fetch("https://www.googleapis.com/calendar/v3/calendars/primary/events", {
@@ -53,7 +56,7 @@ function InputField(props) {
   }
 
   return (
-    <div className="event-form-background">
+    //<div className="event-form-background">
       <div className="event-form-container">
         <div>
           <input
@@ -66,7 +69,12 @@ function InputField(props) {
             value={time}
             onChange={(e) => setTime(e.target.value)}
           />
-
+          <span>Until</span>
+          <input
+            type="time"
+            value={endTime} // Use the new state variable here
+            onChange={(e) => setEndTime(e.target.value)} // And here
+          />
           <input
             type="text"
             placeholder="Event Name"
@@ -83,7 +91,7 @@ function InputField(props) {
           <button onClick={handleCancel}>Cancel</button>
         </div>
       </div>
-      </div>
+      //</div>
   );
 }
 

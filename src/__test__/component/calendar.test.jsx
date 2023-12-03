@@ -1,5 +1,11 @@
 import Calendar from '../../component/calendarComponent/calendar';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
+import { render, screen, fireEvent,waitFor } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+jest.mock('@supabase/auth-helpers-react', () => ({
+  useSession: jest.fn(),
+  useSupabaseClient: jest.fn(),
+}));
 describe('Calendar component tests', () => {
 
 
@@ -16,18 +22,22 @@ describe('Calendar component tests', () => {
     expect(monthYearElement).toBeInTheDocument();
     
   });
-
-
-
-  test('clicking on a day shows the correct date', async ()=> {
-    render(<Calendar />);
-    
-    
-    const dayButton = screen.getByText('15');
-    
-    // Click the day button
-    fireEvent.click(dayButton);
-    
-    expect(screen.getByText('Selected Date: Wednesday, November 15, 2023')).toBeInTheDocument();
+  test('renders event modal when a day is clicked', () => {
+    useSession.mockImplementation(() => ({
+      user: { email: 'testuser@gmail.com' },
+      provider_token: 'mock_provider_token',
+    }));
+  
+    const { getByText } = render(<Calendar />);
+  
+    // Simulate clicking on a day
+    const dayElement = getByText('15'); // Replace '15' with the actual text of the day element
+    fireEvent.click(dayElement);
+  
+    // Check if the event modal is displayed
+    const modalElement = getByText('Events on Fri Dec 15 2023:'); // Replace 'Event Modal' with the actual text or label of the modal
+    expect(modalElement).toBeInTheDocument();
   });
+
+  
 }); 
