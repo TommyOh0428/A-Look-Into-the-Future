@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+# A Look Into the Future
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Website
+Our project has been deployed through Netlify and can be accessed through the following link:
 
-## Available Scripts
+https://656c055da033a5000997fc59--a-look-into-the-future-project.netlify.app/
 
-In the project directory, you can run:
+## Table of Contents
+### Collaborators
+### Overview of the project
+### General technologies used
+### How to run the project locally
+### API Reference
+### Testing
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Collaborators
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Tommy Oh : koa18@sfu.ca
+- Navid Ahmed: naa54@sfu.ca
+- Abdurisaq Heban: Ahh8@sfu.ca
+- Uros: kka143@sfu.ca
 
-### `npm test`
+## Overview of the project
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This project is designed to be a valuable tool for individuals seeking to schedule events in their calendar, particularly those dependent on weather conditions. The application offers the capability to view weather forecasts for specific dates, thereby assisting in the planning of such events. Additionally, it caters to preferences for conducting activities during daylight by providing information on sunrise and sunset times. A unique feature of this application is its ability to retrieve historical weather data, offering insights into weather conditions for past events. Moreover, it enhances user experience by enabling the setting of reminders for forthcoming events, ensuring efficient and effective event management.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## General technologies used
+For this project, our group has used React.js as the main framework for the front-end development and used Jest for unit testing and integration testing. For our deployment, we used Netlify to deploy our project.
+## How to run the project locally
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone the repository
+2. Install the dependencies and compile the project
+```bash
+//to install the dependencies
+npm install
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+//to run the project
+npm start
+```
 
-### `npm run eject`
+## API Reference
+For the weather data, we used openweather API to receive the current weather data and displayed in weather component.
+For Calender component, we used Google Calendar API to create events and display them in the calendar both in the website and Google Calendar itself. We also used Supabase to manage Login and Logout and integrate with the calendar component.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Testing
