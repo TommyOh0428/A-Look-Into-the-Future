@@ -1,4 +1,6 @@
 .container {
+    width: 607px;
+    height: 850px;
     margin: auto;
     width: 100%;
     height: 100%;
@@ -12,7 +14,7 @@
     display: flex;
     justify-content: center;
     gap: 2.3%;
-    padding-top: 7.5%;
+    padding-top: 3.5%;
     height:11%;
     width: 100%;
 }
@@ -46,7 +48,7 @@
     margin-top: 3.63%;
     display: flex;
     justify-content: center;
-    height:33%;
+    height:25%;
     width: 100%;
 }
 
@@ -57,7 +59,7 @@
     font-size: 4.25vmin;
     font-weight: 400;
     cursor: default;
-    height:12%;
+    height:6%;
     width: 100%;
 }
 
@@ -74,14 +76,14 @@
 
 .data-container {
     position:absolute;
-    margin-top: 8.25%;
     color: white;
     display: flex;
     justify-content: center;
     cursor: default;
-    height:30%;
+    height:16%;
     width: 100%;
-    bottom:1%;
+    bottom:27%;
+    padding-bottom: 5%;
 }
 
 .element {
@@ -91,20 +93,48 @@
     gap: 1%;
     height:45%;
     width: 26.19%;
+
 }
 
 .data {
-    font-size: 1.9vw;
+    font-size: 2.85 vmin;
     font-weight: 400;
     height:45%;
     width: 120.19%;
 }
 
 .text {
-    font-size: 1.2vw;
+    font-size: 1.8vmin;
     font-weight: 400;
 }
 
 .icon {
     margin-top: 1.25%;
+}
+
+.sunrise-sunset {
+    position:absolute;
+    bottom:2%;
+    left: 10%;
+    color: white;
+    font-size: 1.8vmin;
+
+}
+
+.weather-icons img{
+    width: 4.3vw;
+    height: 6.6vh;
+} 
+
+.high-low-temp{
+    position:absolute;
+    color: white;
+    font-size: 1.8vmin;
+    bottom:2%;
+    right: 10%;
+}
+
+.temp-icons img{
+    width: 4.3vw;
+    height: 6.6vh;
 }
