@@ -1,6 +1,8 @@
 import Calendar from '../../component/calendarComponent/calendar';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 import { render, screen, fireEvent,waitFor } from '@testing-library/react';
+import InputField from '../../component/calendarComponent/input_field';
+
 import { MemoryRouter } from 'react-router-dom';
 jest.mock('@supabase/auth-helpers-react', () => ({
   useSession: jest.fn(),
@@ -20,7 +22,7 @@ describe('Calendar component tests', () => {
 
 
     expect(monthYearElement).toBeInTheDocument();
-    
+     
   });
   test('renders event modal when a day is clicked', () => {
     useSession.mockImplementation(() => ({
@@ -41,3 +43,18 @@ describe('Calendar component tests', () => {
 
   
 }); 
+
+  test('cancel creation of a new event to calendar', async () => {
+    const { getByPlaceholderText, getByText } = render(<InputField />);
+    const eventName = getByPlaceholderText('Event Name');
+    const eventDescription = getByPlaceholderText('Event Description');
+   
+      fireEvent.change(eventName, { target: { value: 'Meeting' } });
+      fireEvent.change(eventDescription, { target: { value: 'Serious' } });
+
+      fireEvent.click(getByText('Cancel'));
+
+      expect(eventName.value).toBe('');
+      expect(eventDescription.value).toBe('');
+
+  });

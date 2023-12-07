@@ -2,6 +2,20 @@ import React, { useState} from 'react';
 import { useSession} from '@supabase/auth-helpers-react';
 import EventModal from './eventModal'
 import './calendar.css'
+export async function deleteEvent(eventId, provider_token) {
+  const response = await fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events/${eventId}`, {
+    method: "DELETE",
+    headers: {
+      'Authorization': 'Bearer ' + provider_token,  // Access token for Google
+    },
+  });
+
+  if (!response||(response.status !== 204 && !response.ok)) {
+    throw new Error(`Failed to delete event: ${response.status}`);
+  } else {
+    alert(`Event deleted`);
+  }
+}
 const Calendar = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [events, setEvents] = useState([]);
@@ -34,7 +48,7 @@ const Calendar = () => {
       headers: { 'Authorization': 'Bearer ' + session.provider_token,}
     });
 
-    if (!response.ok) {
+    if (!response||!response.ok) {
       console.error('Error fetching events');
       return;
     }
@@ -65,25 +79,12 @@ const handleEventClick = async (eventId) => {
   alert(`Event details:\n\nName: ${event.summary}\n\nEvent starts at: ${startTime}\nEvent ends at: ${endTime}\n`);
     const shouldDelete = window.confirm('Do you want to delete this event?');
     if(shouldDelete){
-      await deleteEvent(eventId);
+      await deleteEvent(eventId,session.provider_token);
       handleDayClick(selectedDate.getDate());
     }
   };
 
-  async function deleteEvent(eventId) {
-    const response = await fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events/${eventId}`, {
-      method: "DELETE",
-      headers: {
-        'Authorization': 'Bearer ' + session.provider_token,  // Access token for Google
-      },
-    });
   
-    if (!response.ok) {
-      throw new Error(`Failed to delete event: ${response.status}`);
-    } else {
-      alert(`Event deleted`);
-    }
-  }
   const renderCalendar = () => {
     
 

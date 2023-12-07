@@ -61,17 +61,20 @@ function InputField(props) {
         <div>
           <input
             type="date"
+            placeholder="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
           />
           <input
             type="time"
+            placeholder="start time"
             value={time}
             onChange={(e) => setTime(e.target.value)}
           />
           <span>Until</span>
           <input
             type="time"
+            placeholder="end time"
             value={endTime} // Use the new state variable here
             onChange={(e) => setEndTime(e.target.value)} // And here
           />
