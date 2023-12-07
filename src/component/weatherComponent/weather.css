@@ -14,7 +14,7 @@
     display: flex;
     justify-content: center;
     gap: 2.3%;
-    padding-top: 7.5%;
+    padding-top: 3.5%;
     height:11%;
     width: 100%;
 }
@@ -45,15 +45,25 @@
 }
 
 .weather-image {
-    margin-top: 0px;
+    margin-top: 3.63%;
     display: flex;
     justify-content: center;
-    height:33%;
+    height:25%;
     width: 100%;
 }
 
 .weather-temp {
-    margin-top: -40px;
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: 4.25vmin;
+    font-weight: 400;
+    cursor: default;
+    height:6%;
+    width: 100%;
+}
+
+.weather-location {
     display: flex;
     justify-content: center;
     color: white;
@@ -64,26 +74,16 @@
     width: 100%;
 }
 
-.weather-location {
-    display: flex;
-    justify-content: center;
-    color: white;
-    font-size:2 4.25vmin;
-    font-weight: 400;
-    cursor: default;
-    height:12%;
-    width: 100%;
-}
-
 .data-container {
-    margin-top: 8px;
+    position:absolute;
     color: white;
     display: flex;
     justify-content: center;
     cursor: default;
-    height:30%;
+    height:16%;
     width: 100%;
-    bottom:1%;
+    bottom:27%;
+    padding-bottom: 5%;
 }
 
 .element {
@@ -93,45 +93,48 @@
     gap: 1%;
     height:45%;
     width: 26.19%;
+
 }
 
 .data {
-    font-size: 1.9vw;
+    font-size: 2.85 vmin;
     font-weight: 400;
     height:45%;
     width: 120.19%;
 }
 
 .text {
-    font-size: 1.2vw;
+    font-size: 1.8vmin;
     font-weight: 400;
 }
 
 .icon {
-    margin-top: 10px;
+    margin-top: 1.25%;
 }
 
 .sunrise-sunset {
-    margin-top: 20px;
-    margin-left: -260px;
+    position:absolute;
+    bottom:2%;
+    left: 10%;
     color: white;
-    font-size: 20px;
+    font-size: 1.8vmin;
 
 }
 
 .weather-icons img{
-    width: 59px;
-    height: auto;
+    width: 4.3vw;
+    height: 6.6vh;
 } 
 
 .high-low-temp{
-    margin-left: 350px;
-    margin-top: -170px; 
+    position:absolute;
     color: white;
-    font-size: 20px;
+    font-size: 1.8vmin;
+    bottom:2%;
+    right: 10%;
 }
 
 .temp-icons img{
-    width: 59px;
-    height: auto;
+    width: 4.3vw;
+    height: 6.6vh;
 }

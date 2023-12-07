@@ -150,14 +150,18 @@ const WeatherApp = () => {
     <div className="weather-location">Vancouver</div>
     <div className="data-container">
       <div className="element">
-        <img src={humidity_icon} alt="" />
+        <div className="weather-icons">
+          <img src={humidity_icon} alt="" />
+        </div>
         <div className="data">
           <div className="humidity-percent">64%</div>
           <div className="text">Humidity</div>
         </div>
       </div>
       <div className="element">
-        <img src={wind_icon} alt="" />
+        <div className="weather-icons">
+          <img src={wind_icon} alt="" />
+        </div>
         <div className="data">
           <div className="wind-rate">18 km/h</div>
           <div className="text">Wind Speed</div>
@@ -192,7 +196,7 @@ const WeatherApp = () => {
 
     {/* Hourly forecast */}
     <div className="hourly-forecast">
-      <h3>Hourly Forecast</h3>
+      
       {hourlyForecast && hourlyForecast.map((hour, index) => (
         <div key={index} className="hourly-forecast-item">
           <p>{new Date(hour.dt * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>

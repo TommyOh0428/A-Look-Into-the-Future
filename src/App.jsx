@@ -32,7 +32,7 @@ function App() {
     
     <div className="App">
       <header className='banner'>
-        <h1>A Look Into The Future</h1>
+        <h1 className='title'>A Look Into The Future</h1>
       </header>
       <div>
       {session ?
