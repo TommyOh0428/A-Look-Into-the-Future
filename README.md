@@ -3,7 +3,7 @@
 ## Project Website
 Our project has been deployed through Netlify and can be accessed through the following link:
 
-https://656c055da033a5000997fc59--a-look-into-the-future-project.netlify.app/
+https://a-look-into-the-future-project.netlify.app/
 
 ## Table of Contents
 ### Collaborators
