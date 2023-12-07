@@ -45,3 +45,4 @@ For the weather data, we used openweather API to receive the current weather dat
 For Calender component, we used Google Calendar API to create events and display them in the calendar both in the website and Google Calendar itself. We also used Supabase to manage Login and Logout and integrate with the calendar component.
 
 ## Testing
+![](/report/photo/testing.png)
