@@ -187,10 +187,10 @@ const WeatherApp = () => {
       <div className="temp-icons">
         <img src={high_temp_icon} alt="" />
       </div>
-      <div className="high-temp">High: {highTemp}</div>
+      <div className="high-temp" data-testid="high-temp">High: {highTemp}</div>
       <div className="temp-icons">
         <img src={low_temp_icon} alt="" />
-      <div className="low-temp">Low: {lowTemp}</div>
+      <div className="low-temp" data-testid="low-temp">Low: {lowTemp}</div>
       </div>
     </div>
 

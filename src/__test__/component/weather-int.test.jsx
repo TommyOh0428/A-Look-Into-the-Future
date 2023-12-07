@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, waitFor, screen,act  } from '@testing-library/react';
+import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import WeatherApp from '../../component/weatherComponent/weather';
 
 describe('WeatherApp Integration Tests', () => {
@@ -39,26 +39,19 @@ describe('WeatherApp Integration Tests', () => {
 
   describe('WeatherApp Integration Tests', () => {
     test('high and low temperature display', async () => {
-      await act(async () => {
-        render(<WeatherApp />);
-      });
-    
+      render(<WeatherApp />);
+  
+
+  
       // Simulate data loading 
       await new Promise(resolve => setTimeout(resolve, 1000)); // Simulating delay
-    
-      const highTemps = screen.getAllByText((_, node) => 
-        node.textContent.match(/High: \d+°C/)
-      );
-      highTemps.forEach(highTemp => {
-        expect(highTemp).toBeInTheDocument();
-      });
-    
-      const lowTemps = screen.getAllByText((_, node) => 
-        node.textContent.match(/Low: \d+°C/)
-      );
-      lowTemps.forEach(lowTemp => {
-        expect(lowTemp).toBeInTheDocument();
-      });
+  
+
+      const highTemp = await screen.getByTestId('high-temp'); 
+      const lowTemp = await screen.getByTestId('low-temp'); 
+  
+      expect(highTemp).toBeInTheDocument();
+      expect(lowTemp).toBeInTheDocument();
     });
   });
 });
